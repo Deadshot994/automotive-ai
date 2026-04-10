@@ -3,7 +3,7 @@ import faiss
 import numpy as np
 from data import vehicles, manuals
 
-# Load model once
+# Load model 
 model = SentenceTransformer('all-MiniLM-L6-v2')
 
 
@@ -22,11 +22,11 @@ def prepare_texts():
         Brake inspection: {v['service']['brake']}.
         Warranty: {v['service']['warranty']}.
         """
-        texts.append(text.strip())   # ✅ remove extra spaces
+        texts.append(text.strip())   
 
     # Manual data
     for m in manuals:
-        texts.append(m["text"].strip())  # ✅ correct key + clean text
+        texts.append(m["text"].strip())  
 
     return texts
 
@@ -34,7 +34,7 @@ def prepare_texts():
 # Prepare data
 texts = prepare_texts()
 
-# Convert to embeddings (VERY IMPORTANT FIX)
+# Convert to embeddings 
 embeddings = model.encode(texts, convert_to_numpy=True)
 
 # Create FAISS index
